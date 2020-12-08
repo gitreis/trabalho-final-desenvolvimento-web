@@ -7,13 +7,7 @@ require_once './conexao.php';
 
 if($_SESSION['logado']) {
   $sTitulo = 'Produtos';
-  $oPagina = new MontaPagina();
-  printf($oPagina->fMontaPagina($sTitulo, $CABECALHO, $sBody, $sFooter));
-}else{
-  header('Location: ../index.html');
-}
-
-$sTable = '
+  $sTable = '
   <div class="viewport">
     <table class="table mt-5">
       <thead class="thead-dark">
@@ -32,8 +26,10 @@ $sTable = '
         %s
       </tbody>
     </table>
-  </div>
-  ';
+    </div>
+    ';
+    $oPagina = new MontaPagina();
+    printf($oPagina->fMontaPagina($sTitulo, $CABECALHO, $sTable, $sFooter));
 
   function insert($iId, $sProduto, $iQuantidade, $nValor, $sEtoque, $iUnidadeOrdem, $sNivelReposicao, $sDescontinuado){
     $oPdo = fConexao();
@@ -49,33 +45,30 @@ $sTable = '
          , $iUnidadeOrdem
          , $sNivelReposicao
          , $sDescontinuado
-  );
+    );
 
-      $sStmt->bindParam(':produto',$iId);
-      $sStmt->bindParam(':nome',$sProduto);
-      $sStmt->bindParam(':unidade',$iQuantidade);
-      $sStmt->bindParam(':preco',$nValor);
-      $sStmt->bindParam(':estoque',$sEtoque);
-      $sStmt->bindParam(':ordem',$iUnidadeOrdem);
-      $sStmt->bindParam(':nivel',$sNivelReposicao);
-      $sStmt->bindParam('descontinuado',$sDescontinuado);
-      $sStmt->execute();
-      $oQuery = $sStmt->fetch(PDO::FETCH_ASSOC);
+    $sStmt->bindParam(':produto',$iId);
+    $sStmt->bindParam(':nome',$sProduto);
+    $sStmt->bindParam(':unidade',$iQuantidade);
+    $sStmt->bindParam(':preco',$nValor);
+    $sStmt->bindParam(':estoque',$sEtoque);
+    $sStmt->bindParam(':ordem',$iUnidadeOrdem);
+    $sStmt->bindParam(':nivel',$sNivelReposicao);
+    $sStmt->bindParam('descontinuado',$sDescontinuado);
+    $sStmt->execute();
+    $oQuery = $sStmt->fetch(PDO::FETCH_ASSOC);
   }
+}else{
+  header('Location: ../index.html');
+}
+
+
 
   $sTagTbody = '
     <tr>
-
+       %s
     </tr>
   ';
 
 
 
-//   $sTable = sprintf();
-
-//   <tr>
-//   <th scope="row">1</th>
-//   <td>Mark</td>
-//   <td>Otto</td>
-//   <td>@mdo</td>
-// </tr>
