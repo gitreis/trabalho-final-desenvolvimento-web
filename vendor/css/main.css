@@ -1,8 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
 body {
   display: -ms-flexbox;
   display: flex;
@@ -56,4 +51,21 @@ body {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
+}
+
+.viewport {
+  height: 800px;
+  width : 100px;
+}
+
+.altura-footer {
+  height: 100px;
+  width: auto;
+
+}
+
+.body-home {
+  height: 500px;
+  background-color: black;
+  font-size: larger;
 }

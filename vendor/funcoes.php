@@ -3,6 +3,7 @@
   require_once 'conexao.php';
 
   session_start();
+
   if(!empty($_POST['usuario']) && !empty($_POST['senha'])) {
     $oPdo   = fConexao();
     $sStmt  = $oPdo->prepare('SELECT NOME, LOGIN, SENHA FROM USUARIO WHERE LOGIN= :login AND SENHA= :senha');
